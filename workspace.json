@@ -18,6 +18,19 @@
         "style": "css",
         "linter": "eslint"
       }
+    },
+    "@nrwl/angular:application": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:library": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "css"
     }
   },
   "projects": {
@@ -28,15 +41,22 @@
       "targets": {
         "build": {
           "executor": "@nrwl/web:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/test",
             "index": "apps/test/src/index.html",
             "main": "apps/test/src/main.tsx",
             "polyfills": "apps/test/src/polyfills.ts",
             "tsConfig": "apps/test/tsconfig.app.json",
-            "assets": ["apps/test/src/favicon.ico", "apps/test/src/assets"],
-            "styles": ["apps/test/src/styles.css"],
+            "assets": [
+              "apps/test/src/favicon.ico",
+              "apps/test/src/assets"
+            ],
+            "styles": [
+              "apps/test/src/styles.css"
+            ],
             "scripts": [],
             "webpackConfig": "@nrwl/react/plugins/webpack"
           },
@@ -79,15 +99,52 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/test/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "apps/test/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/test"],
+          "outputs": [
+            "coverage/apps/test"
+          ],
           "options": {
             "jestConfig": "apps/test/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": {
+              "configFolder": "apps/test/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/test",
+            "config": {
+              "configFolder": "apps/test/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
           }
         }
       }
@@ -113,7 +170,183 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/test-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/test-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "ui-test": {
+      "root": "libs/ui-test",
+      "sourceRoot": "libs/ui-test/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ui-test/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/ui-test"
+          ],
+          "options": {
+            "jestConfig": "libs/ui-test/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/ui-test/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/ui-test",
+            "config": {
+              "configFolder": "libs/ui-test/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
+    },
+    "ui-ang": {
+      "projectType": "library",
+      "root": "libs/ui-ang",
+      "sourceRoot": "libs/ui-ang/src",
+      "prefix": "attempt-three",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ui-ang/src/**/*.ts",
+              "libs/ui-ang/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/ui-ang"
+          ],
+          "options": {
+            "jestConfig": "libs/ui-ang/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/ui-ang/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/ui-ang",
+            "config": {
+              "configFolder": "libs/ui-ang/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
+    },
+    "ui-test-e2e": {
+      "root": "apps/ui-test-e2e",
+      "sourceRoot": "apps/ui-test-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/ui-test-e2e/cypress.json",
+            "tsConfig": "apps/ui-test-e2e/tsconfig.e2e.json",
+            "devServerTarget": "ui-test:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "ui-test:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/ui-test-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "ui-ang-e2e": {
+      "root": "apps/ui-ang-e2e",
+      "sourceRoot": "apps/ui-ang-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/ui-ang-e2e/cypress.json",
+            "tsConfig": "apps/ui-ang-e2e/tsconfig.e2e.json",
+            "devServerTarget": "ui-ang:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "ui-ang:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/ui-ang-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }

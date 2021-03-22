@@ -6,8 +6,8 @@
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "parserOptions": {
         "project": [
-          "apps/test/tsconfig.*?.json",
-          "apps/test/.storybook/tsconfig.json"
+          "libs/ui-test/tsconfig.*?.json",
+          "libs/ui-test/.storybook/tsconfig.json"
         ]
       },
       "rules": {}

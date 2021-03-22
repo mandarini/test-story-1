@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@attempt-three/ui-test": ["libs/ui-test/src/index.ts"],
+      "@attempt-three/ui-ang": ["libs/ui-ang/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
